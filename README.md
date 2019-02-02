@@ -1,0 +1,37 @@
+# Hierarchical Multi-task Networks for Race, Gender and Facial Beauty Recognition
+## Introduction
+This repository holds the PyTorch implementation of our paper ```Hierarchical
+ Multi-task Networks for Race, Gender and Facial Beauty Recognition```.
+
+
+## How to use
+* Install 3rd party libraries   
+    ````sudo pip3 install -r requirements.txt````
+* Change the [cfg.py](./config/cfg.py) to fit your path
+
+
+## Performance
+| Loss | MAE | RMSE | PC | Acc_R | Acc_G| Epoch | WD |
+| :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
+| MSE | 0.264 | 0.3465 | 0.8637 | 99.22% | 98.48% | 110 | 1e-2|
+| MSE | 0.2556 | 0.3372 | 0.8693 | 99.68% | 98.53% | 170 | 5e-2|
+| MSE | 0.2589 | 0.3382 | 0.8685 | 99.45% | 98.30% | 250 | 1e-1|
+| L1 | 0.2500 | 0.3299 | 0.8753 | 99.26% | 98.16% | 150 | 5e-2|
+| Smooth L1 | 0.2531 | 0.3313 | 0.8738 | 99.54% | 98.58% | 170 | 5e-2|
+
+
+## Comparison with Baselines and  State-of-the-arts
+| Methods | MAE | RMSE | PC |
+| :---: | :---: | :---: | :---: |
+| ResNeXt-50 | 0.2518 | 0.3325 | 0.8777 |
+| ResNet-18 | 0.2818 | 0.3703 | 0.8513 |
+| AlexNet | 0.2938 | 0.3819 | 0.8298 |
+| CRNet | 0.2816 | 0.3669 | 0.8450 |
+| **HMTNet (Ours)** | **0.2500** | **0.3299** | **0.8753** |
+
+
+## Reference
+1. Lu Xu, Jinhai Xiang, and Xiaohui Yuan, “Crnet: Classification and regression neural network for facial beauty prediction,” in Pacific Rim Conference on Multimedia. Springer, 2018, pp. 661–671.
+2. Duorui Xie, Lingyu Liang, Lianwen Jin, Jie Xu, and Mengru Li, “Scut-fbp: A
+ benchmark dataset for facial beauty perception,” in Systems, Man, and Cybernetics (SMC), 2015 IEEE International Conference on. IEEE, 2015, pp. 1821–1826.
+3. Shu Liu, Bo Li, Yang-Yu Fan, Zhe Quo, and Ashok Samal, “Facial attractiveness computation by label distribution learning with deep cnn and geometric features,” in Multimedia and Expo (ICME), 2017 IEEE International Conference on. IEEE, 2017, pp. 1344–1349.

@@ -1,0 +1,8 @@
+# Created by .ignore support plugin (hsz.mobi)
+.idea/
+main/model/
+config/__pycache__/
+models/__pycache__/
+util/TikTok/
+util/__pycache__/
+util/TikTok_with_Annotation.avi
