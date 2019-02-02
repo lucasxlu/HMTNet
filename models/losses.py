@@ -4,7 +4,7 @@ import math
 
 import torch
 import torch.nn as nn
-from torch.nn.modules.loss import _Loss, _assert_no_grad
+from torch.nn.modules.loss import _Loss
 from torch.nn import functional as F
 
 
@@ -48,7 +48,6 @@ class HMTLoss(nn.Module):
 #         self.epsilon = epsilon
 #
 #     def forward(self, input, target):
-#         _assert_no_grad(target)
 #
 #         return torch.log(torch.cosh(target - input) + self.epsilon)
 
@@ -78,7 +77,6 @@ class HuberLoss(_Loss):
         self.delta = delta
 
     def forward(self, input, target):
-        _assert_no_grad(target)
         if F.l1_loss(input, target) < self.delta:
             return 0.5 * F.mse_loss(input, target, size_average=self.size_average, reduce=self.reduce)
         else:
@@ -98,7 +96,6 @@ class SmoothHuberLoss(nn.Module):
         self.delta = delta
 
     def forward(self, input, target):
-        _assert_no_grad(target)
         if nn.L1Loss(input, target) < self.delta:
             return 0.5 * LogCoshLoss(input, target)
         else:
@@ -119,7 +116,6 @@ class WingLoss(_Loss):
         self.C = self.w - self.w * math.log(1 + abs(self.w) / self.epsilon)
 
     def forward(self, input, target):
-        _assert_no_grad(target)
 
         y_hat = []
         for _ in torch.abs(input):
