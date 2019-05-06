@@ -234,7 +234,3 @@ def viz_feature_map(image_file, hmtnet_model_file='../main/model/hmt-net-fbp.pth
     heatmap = cv2.applyColorMap(heatmap, cv2.COLORMAP_JET)
     overlap_heatmap_img = heatmap * 0.7 + img * 0.3
     cv2.imwrite('./heatmap.jpg', overlap_heatmap_img)
-
-
-if __name__ == '__main__':
-    viz_feature_map("C:/Users/LucasX\Desktop/xuegang_face.jpg")

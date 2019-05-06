@@ -94,11 +94,12 @@ class HMTNetRecognizer():
         }
 
 
-def cal_elapse(nn_name, img_file):
+def cal_elapse(nn_name, img_file, use_gpu=True):
     """
     calculate time elapse
     :param nn_name:
     :param img_file:
+    :param use_gpu
     :return:
     """
     import torchvision.models as models
@@ -111,7 +112,7 @@ def cal_elapse(nn_name, img_file):
     image = np.transpose(image, [2, 0, 1])
     input = torch.from_numpy(image).unsqueeze(0).float()
 
-    device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
+    device = torch.device("cuda:0" if torch.cuda.is_available() and use_gpu else "cpu")
 
     if nn_name == 'AlexNet':
         alex_net = models.AlexNet(num_classes=1)
@@ -328,10 +329,8 @@ def infer_and_show_mul_people_img(img_filepath):
 
 
 if __name__ == '__main__':
-    img_dir = "D:/Users\LucasX\PycharmProjects\HMT-Net/util\TikTok"
+    img_dir = "../util/TikTok"
     hmtnet_recognizer = HMTNetRecognizer(pretrained_model_path='../main/model/hmt-net-fbp.pth')
-
-    # pprint(hmtnet_recognizer.infer("C:/Users/LucasX\Desktop/xuegang.jpg"))
 
     for _ in os.listdir(img_dir):
         print('Processing {0} ...'.format(_))
@@ -341,3 +340,8 @@ if __name__ == '__main__':
             infer_and_show_img(os.path.join(img_dir, _), hmt_result, show_window=False)
         except:
             pass
+
+    # elapses = []
+    # for _ in range(10):
+    #     elapses.append(cal_elapse(nn_name='ResNet50', img_file='../testimg.jpg', use_gpu=False))
+    # print(sum(elapses) / len(elapses) * 1000)
