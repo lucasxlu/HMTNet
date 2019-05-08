@@ -1,7 +1,7 @@
-# Hierarchical Multi-task Networks for Race, Gender and Facial Beauty Recognition
+# Hierarchical Multi-task Networks for Race, Gender and Facial Attractiveness Recognition
 ## Introduction
 This repository holds the PyTorch implementation of our paper ```Hierarchical
- Multi-task Networks for Race, Gender and Facial Beauty Recognition```.
+ Multi-task Networks for Race, Gender and Facial Attractiveness Recognition```.
 
 ![HMTNet](./hmt_architecture.png)
 
@@ -39,8 +39,15 @@ This repository holds the PyTorch implementation of our paper ```Hierarchical
 ![Feature Visualization](./feature_vis.png)
 
 
-## Reference
-1. Lu Xu, Jinhai Xiang, and Xiaohui Yuan, “Crnet: Classification and regression neural network for facial beauty prediction,” in Pacific Rim Conference on Multimedia. Springer, 2018, pp. 661–671.
-2. Duorui Xie, Lingyu Liang, Lianwen Jin, Jie Xu, and Mengru Li, “Scut-fbp: A
- benchmark dataset for facial beauty perception,” in Systems, Man, and Cybernetics (SMC), 2015 IEEE International Conference on. IEEE, 2015, pp. 1821–1826.
-3. Shu Liu, Bo Li, Yang-Yu Fan, Zhe Quo, and Ashok Samal, “Facial attractiveness computation by label distribution learning with deep cnn and geometric features,” in Multimedia and Expo (ICME), 2017 IEEE International Conference on. IEEE, 2017, pp. 1344–1349.
+## Citation
+If you find this repository helps your research, please cite our paper:
+```
+@inproceedings{xu2019hierarchical,
+  title={Hierarchical Multi-task Networks for Race, Gender and Facial Attractiveness Recognition},
+  author={Xu, Lu and Heng, Fan and Jinhai, Xiang},
+  booktitle={2019 26th IEEE International Conference on Image Processing 
+  (ICIP)},
+  year={2019},
+  organization={IEEE}
+}
+```

@@ -19,7 +19,7 @@ class HMTLoss(nn.Module):
 
         self.g_criterion = nn.CrossEntropyLoss()
         self.r_criterion = nn.CrossEntropyLoss()
-        self.a_criterion = nn.MSELoss()
+        self.a_criterion = nn.L1Loss()
         # self.a_criterion = HuberLoss()
         # self.a_criterion = SmoothHuberLoss()
 
@@ -31,11 +31,6 @@ class HMTLoss(nn.Module):
         hmt_loss = self.weight_g * g_loss + self.weight_r * r_loss + self.weight_a * a_loss
 
         return hmt_loss
-
-    # def backward(self, retain_graph=True):
-    #     self.loss.backward(retain_graph=retain_graph)
-    #
-    #     return self.loss
 
 
 # class LogCoshLoss(_Loss):

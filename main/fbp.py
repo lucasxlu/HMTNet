@@ -434,62 +434,61 @@ def train_hmtnet(hmt_net, train_loader, test_loader, num_epochs, inference=False
                     print('[%d, %5d] loss: %.5f' % (epoch + 1, i + 1, running_loss / 50))
                     running_loss = 0.0
 
-            if True:  # epoch % 10 == 9:
-                hmt_net.eval()
+            hmt_net.eval()
 
-                predicted_attractiveness_values = []
-                gt_attractiveness_values = []
+            predicted_attractiveness_values = []
+            gt_attractiveness_values = []
 
-                total = 0
-                g_correct = 0
-                r_correct = 0
-                for data in test_loader:
-                    images, g_gt, r_gt, a_gt = data['image'], data['gender'], data['race'], \
-                                               data['attractiveness']
-                    hmt_net = hmt_net.to(device)
-                    g_gt = g_gt.to(device)
-                    r_gt = r_gt.to(device)
-                    a_gt = a_gt.to(device)
+            total = 0
+            g_correct = 0
+            r_correct = 0
+            for data in test_loader:
+                images, g_gt, r_gt, a_gt = data['image'], data['gender'], data['race'], \
+                                           data['attractiveness']
+                hmt_net = hmt_net.to(device)
+                g_gt = g_gt.to(device)
+                r_gt = r_gt.to(device)
+                a_gt = a_gt.to(device)
 
-                    g_pred, r_pred, a_pred = hmt_net.forward(images.to(device))
+                g_pred, r_pred, a_pred = hmt_net.forward(images.to(device))
 
-                    predicted_attractiveness_values += a_pred.to("cpu").data.numpy().tolist()
-                    gt_attractiveness_values += a_gt.to("cpu").numpy().tolist()
+                predicted_attractiveness_values += a_pred.to("cpu").data.numpy().tolist()
+                gt_attractiveness_values += a_gt.to("cpu").numpy().tolist()
 
-                    g_pred = g_pred.view(cfg['batch_size'], -1)
-                    r_pred = r_pred.view(cfg['batch_size'], -1)
+                g_pred = g_pred.view(cfg['batch_size'], -1)
+                r_pred = r_pred.view(cfg['batch_size'], -1)
 
-                    _, g_predicted = torch.max(g_pred.data, 1)
-                    _, r_predicted = torch.max(r_pred.data, 1)
-                    total += g_gt.size(0)
-                    g_correct += (g_predicted == g_gt).sum().item()
-                    r_correct += (r_predicted == r_gt).sum().item()
+                _, g_predicted = torch.max(g_pred.data, 1)
+                _, r_predicted = torch.max(r_pred.data, 1)
+                total += g_gt.size(0)
+                g_correct += (g_predicted == g_gt).sum().item()
+                r_correct += (r_predicted == r_gt).sum().item()
 
-                print('total = %d ...' % total)
-                print('Gender correct sample = %d ...' % g_correct)
-                print('Race correct sample = %d ...' % r_correct)
-                print('Accuracy of Race Classification: %.4f' % (r_correct / total))
-                print('Accuracy of Gender Classification: %.4f' % (g_correct / total))
+            print('total = %d ...' % total)
+            print('Gender correct sample = %d ...' % g_correct)
+            print('Race correct sample = %d ...' % r_correct)
+            print('Accuracy of Race Classification: %.4f' % (r_correct / total))
+            print('Accuracy of Gender Classification: %.4f' % (g_correct / total))
 
-                mae_lr = round(
-                    mean_absolute_error(np.array(gt_attractiveness_values),
-                                        np.array(predicted_attractiveness_values).ravel()), 4)
-                rmse_lr = round(np.math.sqrt(
-                    mean_squared_error(np.array(gt_attractiveness_values),
-                                       np.array(predicted_attractiveness_values).ravel())), 4)
-                pc = round(
-                    np.corrcoef(np.array(gt_attractiveness_values), np.array(predicted_attractiveness_values).ravel())[
-                        0, 1], 4)
+            mae_lr = round(
+                mean_absolute_error(np.array(gt_attractiveness_values),
+                                    np.array(predicted_attractiveness_values).ravel()), 4)
+            rmse_lr = round(np.math.sqrt(
+                mean_squared_error(np.array(gt_attractiveness_values),
+                                   np.array(predicted_attractiveness_values).ravel())), 4)
+            pc = round(
+                np.corrcoef(np.array(gt_attractiveness_values), np.array(predicted_attractiveness_values).ravel())[
+                    0, 1], 4)
 
-                print('===============The Mean Absolute Error of HMT-Net is {0}===================='.format(mae_lr))
-                print('===============The Root Mean Square Error of HMT-Net is {0}===================='.format(rmse_lr))
-                print('===============The Pearson Correlation of HMT-Net is {0}===================='.format(pc))
+            print('===============The Mean Absolute Error of HMT-Net is {0}===================='.format(mae_lr))
+            print('===============The Root Mean Square Error of HMT-Net is {0}===================='.format(rmse_lr))
+            print('===============The Pearson Correlation of HMT-Net is {0}===================='.format(pc))
 
-                model_path_dir = './model'
-                file_utils.mkdirs_if_not_exist(model_path_dir)
-                torch.save(hmt_net.state_dict(), os.path.join(model_path_dir, 'hmt-net-fbp-epoch-%d.pth' % (epoch + 1)))
+            model_path_dir = './model'
+            file_utils.mkdirs_if_not_exist(model_path_dir)
+            torch.save(hmt_net.state_dict(), os.path.join(model_path_dir, 'hmt-net-fbp-epoch-%d.pth' % (epoch + 1)))
 
-                hmt_net.train()
+            hmt_net.train()
 
         print('Finished Training')
         print('Save trained model...')
