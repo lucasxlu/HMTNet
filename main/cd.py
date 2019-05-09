@@ -87,7 +87,7 @@ def main_scut(filenames, X, y):
     """
     from sklearn.model_selection import train_test_split
 
-    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
+    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=40)
     reg = linear_model.Ridge(alpha=50.0)
     # reg = linear_model.Lasso(alpha=0.005)
     reg.fit(X_train, y_train)

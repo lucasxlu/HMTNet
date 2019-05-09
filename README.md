@@ -11,7 +11,7 @@ This repository holds the PyTorch implementation of our paper ```Hierarchical
 * Modify [cfg.py](./config/cfg.py) to fit your path
 
 
-## Performance
+## Hyper-param Selection
 | Loss | MAE | RMSE | PC | Acc_R | Acc_G| Epoch | WD |
 | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
 | MSE | 0.2640 | 0.3465 | 0.8637 | 99.22% | 98.48% | 110 | 1e-2|
@@ -21,7 +21,7 @@ This repository holds the PyTorch implementation of our paper ```Hierarchical
 | Smooth L1 | 0.2531 | 0.3313 | 0.8738 | 99.54% | 98.58% | 170 | 5e-2|
 
 
-## Comparison with Baselines and Prior Arts
+## Performance Comparison
 | Methods | MAE | RMSE | PC |
 | :---: | :---: | :---: | :---: |
 | ResNeXt-50 | 0.2518 | 0.3325 | 0.8777 |
@@ -31,11 +31,11 @@ This repository holds the PyTorch implementation of our paper ```Hierarchical
 | **HMTNet (Ours)** | **0.2500** | **0.3299** | **0.8753** |
 
 
-## Predicted Samples
+## Samples
 ![Prediction](./fbp_pred.png)
 
 
-## Feature Visualization
+## Visualization
 ![Feature Visualization](./feature_vis.png)
 
 
