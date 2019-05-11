@@ -388,7 +388,6 @@ def train_hmtnet(hmt_net, train_loader, test_loader, num_epochs, inference=False
 
     if torch.cuda.device_count() > 1:
         print("We are running on", torch.cuda.device_count(), "GPUs!")
-        # dim = 0 [30, xxx] -> [10, ...], [10, ...], [10, ...] on 3 GPUs
         hmt_net = nn.DataParallel(hmt_net)
 
     hmt_net = hmt_net.to(device)
@@ -410,7 +409,6 @@ def train_hmtnet(hmt_net, train_loader, test_loader, num_epochs, inference=False
                 inputs, gender, race, attractiveness = data['image'], data['gender'], data['race'], \
                                                        data['attractiveness']
 
-                hmt_net = hmt_net.cuda()
                 inputs, gender, race, attractiveness = inputs.to(device), gender.to(device), race.to(
                     device), attractiveness.float().to(device)
 
@@ -554,13 +552,13 @@ def train_hmtnet(hmt_net, train_loader, test_loader, num_epochs, inference=False
 
 
 if __name__ == '__main__':
-    print('***************************start training GNet***************************')
-    gnet = GNet()
-    criterion = nn.CrossEntropyLoss()
-    train_loader, test_loader = data_loader.load_scutfbp5500_64()
-    optimizer = optim.SGD(gnet.parameters(), lr=0.001, momentum=0.9, weight_decay=5e-2)
-    train_gnet(gnet, train_loader, test_loader, criterion, optimizer, num_epochs=170, inference=False)
-    print('***************************finish training GNet***************************')
+    # print('***************************start training GNet***************************')
+    # gnet = GNet()
+    # criterion = nn.CrossEntropyLoss()
+    # train_loader, test_loader = data_loader.load_scutfbp5500_64()
+    # optimizer = optim.SGD(gnet.parameters(), lr=0.001, momentum=0.9, weight_decay=5e-2)
+    # train_gnet(gnet, train_loader, test_loader, criterion, optimizer, num_epochs=170, inference=False)
+    # print('***************************finish training GNet***************************')
 
     # print('###############################start training RNet###############################')
     # rnet = RNet()
@@ -575,10 +573,10 @@ if __name__ == '__main__':
     # train_anet(VggM(), train_loader, test_loader, nn.MSELoss(), 200, False)
     # print('***************************end training ANet***************************')
 
-    # print('+++++++++++++++++++++++++++++++++start training HMT-Net on SCUT-FBP5500+++++++++++++++++++++++++++++++++')
-    # hmtnet = HMTNet()
-    # # train_loader, test_loader = data_loader.load_scutfbp5500_cv(cv_index=1)
-    # train_loader, test_loader = data_loader.load_scutfbp5500_64()
-    #
-    # train_hmtnet(hmtnet, train_loader, test_loader, 250, False)
-    # print('+++++++++++++++++++++++++++++++++finish training HMT-Net SCUT-FBP5500+++++++++++++++++++++++++++++++++')
+    print('+++++++++++++++++++++++++++++++++start training HMT-Net on SCUT-FBP5500+++++++++++++++++++++++++++++++++')
+    hmtnet = HMTNet()
+    # train_loader, test_loader = data_loader.load_scutfbp5500_cv(cv_index=1)
+    train_loader, test_loader = data_loader.load_scutfbp5500_64()
+
+    train_hmtnet(hmtnet, train_loader, test_loader, 250, False)
+    print('+++++++++++++++++++++++++++++++++finish training HMT-Net SCUT-FBP5500+++++++++++++++++++++++++++++++++')

@@ -33,31 +33,11 @@ class HMTLoss(nn.Module):
         return hmt_loss
 
 
-# class LogCoshLoss(_Loss):
-#     """
-#     LogCosh Loss
-#     """
-#
-#     def __init__(self, size_average=False, reduce=True, epsilon=1e-4):
-#         super(LogCoshLoss, self).__init__(size_average, reduce)
-#         self.epsilon = epsilon
-#
-#     def forward(self, input, target):
-#
-#         return torch.log(torch.cosh(target - input) + self.epsilon)
-
-
-class LogCoshLoss(nn.Module):
+def log_cosh_loss(input, target, epsilon=0):
     """
     Definition of LogCosh Loss
     """
-
-    def __init__(self, epsilon=0):
-        super(LogCoshLoss, self).__init__()
-        self.epsilon = epsilon
-
-    def forward(self, input, target):
-        return torch.log(torch.cosh(target - input) + self.epsilon)
+    return torch.log(torch.cosh(target - input) + epsilon)
 
 
 class HuberLoss(_Loss):
@@ -79,47 +59,22 @@ class HuberLoss(_Loss):
                                           reduce=self.reduce) - 0.5 * self.delta * self.delta
 
 
-class SmoothHuberLoss(nn.Module):
+class SmoothHuberLoss(_Loss):
     """
     SmoothHuberLoss
-    if |y-\hat{y}| < \delta, return \frac{1}{2}LogCosh
-    else return \delta MAE - \frac{1}{2}\delta ** 2
+    if |y-\hat{y}| < \delta, return log(\frac{1}{2}LogCosh(y-\hat{y}))
+    else return |y-\hat{y}|
     """
 
-    def __init__(self, delta=0.1):
+    def __init__(self, reduction='mean', delta=0.01):
         super(SmoothHuberLoss, self).__init__()
         self.delta = delta
+        self.reduction = reduction
 
     def forward(self, input, target):
-        if nn.L1Loss(input, target) < self.delta:
-            return 0.5 * LogCoshLoss(input, target)
-        else:
-            return self.delta * nn.L1Loss(input, target) - 0.5 * self.delta * self.delta
+        t = torch.abs(input - target)
 
-
-class WingLoss(_Loss):
-    """
-    WingLoss
-    first introduced at CVPR2018
-    http://openaccess.thecvf.com/content_cvpr_2018/papers/Feng_Wing_Loss_for_CVPR_2018_paper.pdf
-    """
-
-    def __init__(self, size_average=True, reduce=True, epsilon=2, w=10):
-        super(WingLoss, self).__init__(size_average, reduce)
-        self.epsilon = epsilon
-        self.w = w
-        self.C = self.w - self.w * math.log(1 + abs(self.w) / self.epsilon)
-
-    def forward(self, input, target):
-
-        y_hat = []
-        for _ in torch.abs(input):
-            if _ < self.epsilon:
-                y_hat.append(self.w * torch.log(1 + _ / self.epsilon))
-            else:
-                y_hat.append(_ - self.C - target)
-
-        return F.l1_loss(torch.Tensor(y_hat).to(torch.device("cuda:0")), target)
+        return torch.mean(torch.where(t < self.delta, log_cosh_loss(input, target), F.l1_loss(input, target)))
 
 
 class HMTFERLoss(nn.Module):
