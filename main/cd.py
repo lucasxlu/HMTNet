@@ -1,7 +1,5 @@
 """
 cross-dataset test on SCUT-FBP dataset
-the results of 5-fold CV are:
-0.8582, 0.8607, 0.8662, 0.8709, 0.8977
 """
 
 import os
