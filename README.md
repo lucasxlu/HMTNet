@@ -1,7 +1,7 @@
 # Hierarchical Multi-task Networks for Race, Gender and Facial Attractiveness Recognition
 ## Introduction
-This repository holds the PyTorch implementation of our paper ```Hierarchical
- Multi-task Networks for Race, Gender and Facial Attractiveness Recognition```.
+This repository holds the PyTorch implementation of our paper [Hierarchical
+ Multi-task Networks for Race, Gender and Facial Attractiveness Recognition](https://ieeexplore.ieee.org/abstract/document/8803614).
 
 ![HMTNet](./hmt_architecture.png)
 
@@ -43,10 +43,10 @@ This repository holds the PyTorch implementation of our paper ```Hierarchical
 If you find this repository helps your research, please cite our paper:
 ```
 @inproceedings{xu2019hierarchical,
-  title={Hierarchical Multi-task Networks for Race, Gender and Facial Attractiveness Recognition},
-  author={Xu, Lu and Heng, Fan and Jinhai, Xiang},
-  booktitle={2019 26th IEEE International Conference on Image Processing 
-  (ICIP)},
+  title={Hierarchical Multi-Task Network For Race, Gender and Facial Attractiveness Recognition},
+  author={Xu, Lu and Fan, Heng and Xiang, Jinhai},
+  booktitle={2019 IEEE International Conference on Image Processing (ICIP)},
+  pages={3861--3865},
   year={2019},
   organization={IEEE}
 }
