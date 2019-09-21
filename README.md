@@ -33,6 +33,7 @@ This repository holds the PyTorch implementation of our paper [Hierarchical Mult
 ## Samples
 ![Prediction](./fbp_pred.png)
 
+![TikTok Video](./TikTok.gif)
 
 ## Deep Feature Visualization
 ![Feature Visualization](./feature_vis.png)
