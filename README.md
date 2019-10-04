@@ -33,7 +33,7 @@ This repository holds the PyTorch implementation of our paper [Hierarchical Mult
 
 
 **New:** By leveraging ``FiveCrops`` inference, we are able to achieve better
- performance at ``129th Epoch``! 
+ performance at ``149th Epoch``! 
 
 
 ## Samples
