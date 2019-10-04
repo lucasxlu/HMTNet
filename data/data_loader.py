@@ -5,6 +5,7 @@ import torch
 from torch.utils.data import Dataset, DataLoader
 from torch.utils.data.sampler import SubsetRandomSampler
 from torchvision import transforms
+from torchvision.transforms import Lambda
 
 sys.path.append('../')
 from data.datasets import FaceDataset, FDataset, RafFaceDataset, ScutFBP
@@ -21,9 +22,10 @@ data_transforms = {
     ]),
     'test': transforms.Compose([
         transforms.Resize(256),
-        transforms.CenterCrop(224),
-        transforms.ToTensor(),
-        transforms.Normalize([0.485, 0.456, 0.406], [0.229, 0.224, 0.225])
+        transforms.FiveCrop(224),
+        Lambda(lambda crops: torch.stack([transforms.ToTensor()(crop) for crop in crops])),
+        transforms.Lambda(lambda crops: torch.stack(
+            [transforms.Normalize([0.485, 0.456, 0.406], [0.229, 0.224, 0.225])(crop) for crop in crops])),
     ]),
 }
 
@@ -119,11 +121,11 @@ def load_scutfbp5500_64():
     :return:
     """
     train_loader = torch.utils.data.DataLoader(FDataset(train=True, transform=data_transforms['train']),
-                                               batch_size=cfg['batch_size'], shuffle=True, num_workers=4,
-                                               drop_last=True)
+                                               batch_size=cfg['batch_size'], shuffle=True, num_workers=50,
+                                               drop_last=True, pin_memory=True)
     test_loader = torch.utils.data.DataLoader(FDataset(train=False, transform=data_transforms['test']),
-                                              batch_size=cfg['batch_size'], shuffle=False, num_workers=4,
-                                              drop_last=True)
+                                              batch_size=cfg['batch_size'], shuffle=False, num_workers=50,
+                                              drop_last=True, pin_memory=True)
 
     return train_loader, test_loader
 

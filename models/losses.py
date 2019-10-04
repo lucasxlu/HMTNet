@@ -19,9 +19,9 @@ class HMTLoss(nn.Module):
 
         self.g_criterion = nn.CrossEntropyLoss()
         self.r_criterion = nn.CrossEntropyLoss()
-        self.a_criterion = nn.L1Loss()
+        # self.a_criterion = nn.L1Loss()
         # self.a_criterion = HuberLoss()
-        # self.a_criterion = SmoothHuberLoss()
+        self.a_criterion = SmoothHuberLoss()
 
     def forward(self, g_pred, g_gt, r_pred, r_gt, a_pred, a_gt):
         g_loss = self.g_criterion(g_pred, g_gt)

@@ -13,8 +13,6 @@ from torch.optim import lr_scheduler
 from torchvision import transforms, datasets
 from sklearn.metrics import mean_absolute_error, mean_squared_error
 
-# os.environ['CUDA_VISIBLE_DEVICES'] = 'gpu02'
-
 sys.path.append('../')
 from models.vggm import VggM
 from util import file_utils
@@ -384,6 +382,7 @@ def train_hmtnet(hmt_net, train_loader, test_loader, num_epochs, inference=False
     :param inference:
     :return:
     """
+    print(hmt_net)
     device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 
     if torch.cuda.device_count() > 1:
@@ -447,8 +446,13 @@ def train_hmtnet(hmt_net, train_loader, test_loader, num_epochs, inference=False
                 g_gt = g_gt.to(device)
                 r_gt = r_gt.to(device)
                 a_gt = a_gt.to(device)
+                images = images.to(device)
 
-                g_pred, r_pred, a_pred = hmt_net.forward(images.to(device))
+                bs, ncrops, c, h, w = images.size()
+                g_pred, r_pred, a_pred = hmt_net(images.view(-1, c, h, w))  # fuse batch size and ncrops
+                a_pred = a_pred.view(bs, ncrops, -1).mean(1)  # avg over crops
+                g_pred = g_pred.view(bs, ncrops, -1).mean(1)  # avg over crops
+                r_pred = r_pred.view(bs, ncrops, -1).mean(1)  # avg over crops
 
                 predicted_attractiveness_values += a_pred.to("cpu").data.numpy().tolist()
                 gt_attractiveness_values += a_gt.to("cpu").numpy().tolist()
@@ -515,8 +519,13 @@ def train_hmtnet(hmt_net, train_loader, test_loader, num_epochs, inference=False
         g_gt = g_gt.to(device)
         r_gt = r_gt.to(device)
         a_gt = a_gt.to(device)
+        images = images.to(device)
 
-        g_pred, r_pred, a_pred = hmt_net.forward(images.to(device))
+        bs, ncrops, c, h, w = images.size()
+        g_pred, r_pred, a_pred = hmt_net(images.view(-1, c, h, w))  # fuse batch size and ncrops
+        a_pred = a_pred.view(bs, ncrops, -1).mean(1)  # avg over crops
+        g_pred = g_pred.view(bs, ncrops, -1).mean(1)  # avg over crops
+        r_pred = r_pred.view(bs, ncrops, -1).mean(1)  # avg over crops
 
         predicted_attractiveness_values += a_pred.to("cpu").data.numpy().tolist()
         gt_attractiveness_values += a_gt.to("cpu").numpy().tolist()
