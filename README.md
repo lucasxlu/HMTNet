@@ -45,6 +45,10 @@ This repository holds the PyTorch implementation of our paper [Hierarchical Mult
 ![Feature Visualization](./feature_vis.png)
 
 
+## Resources
+- [x] [Pretrained HMTNet](https://drive.google.com/file/d/1S11I3LlIpIW0PZusmTz52kETlW4u_ODF/view?usp=sharing)
+
+
 ## Citation
 If you find this repository helps your research, please cite our paper:
 ```
