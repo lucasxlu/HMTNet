@@ -4,6 +4,12 @@ This repository holds the PyTorch implementation of our paper [Hierarchical Mult
 
 ![HMTNet](./hmt_architecture.png)
 
+
+### New!!!
+1. By leveraging ``FiveCrops`` inference, we are able to achieve better performance at ``149th Epoch``! 
+2. We also report ``5 cross validation`` results, since we find newly proposed models often use this metric instead of ``6/4 splitting strategy``.
+
+
 ## How to use
 * Install 3rd party libraries   
     ````sudo pip3 install -r requirements.txt````
@@ -21,6 +27,7 @@ This repository holds the PyTorch implementation of our paper [Hierarchical Mult
 
 
 ## Performance Comparison
+### 6/4 Splitting
 | Methods | MAE | RMSE | PC |
 | :---: | :---: | :---: | :---: |
 | ResNeXt-50 | 0.2518 | 0.3325 | 0.8777 |
@@ -31,10 +38,11 @@ This repository holds the PyTorch implementation of our paper [Hierarchical Mult
 | **HMTNet (Ours)** | **0.2501** | **0.3263** | **0.8783** |
 | **HMTNet (Ours)** | **0.2439** | **0.3226** | **0.8801** |
 
-
-**New:** By leveraging ``FiveCrops`` inference, we are able to achieve better
- performance at ``149th Epoch``! 
-
+### 5 Fold Cross Validation
+| Round | Acc_r | Acc_g | MAE | RMSE | PC | Pretrained Weights | 
+| :---: | :---: | :---: | :---: | :---: | :---: | :---: |
+| 1 | 99.54% | 98.53% | 0.2431 | 0.315 | 0.8916 | [HMTNet_CV1]() |
+ 
 
 ## Samples
 ![Prediction](./fbp_pred.png)
