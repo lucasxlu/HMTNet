@@ -41,8 +41,11 @@ This repository holds the PyTorch implementation of our paper [Hierarchical Mult
 ### 5 Fold Cross Validation
 | Round | Acc_r | Acc_g | MAE | RMSE | PC | Pretrained Weights | 
 | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
-| 1 | 99.54% | 98.53% | 0.2431 | 0.315 | 0.8916 | [HMTNet_CV1]() |
- 
+| 1 | 99.54% | 98.53% | 0.2431 | 0.3150 | 0.8916 | [HMTNet_CV1]() |
+| 2 | 99.82% | 98.71% | 0.2425 | 0.3246 | 0.8813 | [HMTNet_CV2]() |
+| 3 | 99.54% | 98.81% | 0.2431 | 0.3204 | 0.8876 | [HMTNet_CV3]() |
+| 4 | 99.63% | 98.25% | 0.2331 | 0.3033 | 0.9002 | [HMTNet_CV4]() |
+
 
 ## Samples
 ![Prediction](./fbp_pred.png)
