@@ -39,6 +39,8 @@ This repository holds the PyTorch implementation of our paper [Hierarchical Mult
 | **HMTNet (Ours)** | **0.2439** | **0.3226** | **0.8801** |
 
 ### 5 Fold Cross Validation
+#### MSE Loss
+
 | Round | Acc_r | Acc_g | MAE | RMSE | PC | Pretrained Weights | 
 | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
 | 1 | 99.54% | 98.53% | 0.2431 | 0.3150 | 0.8916 | [HMTNet_CV1]() |
@@ -47,6 +49,14 @@ This repository holds the PyTorch implementation of our paper [Hierarchical Mult
 | 4 | 99.63% | 98.25% | 0.2331 | 0.3033 | 0.9002 | [HMTNet_CV4]() |
 | 5 | 99.26% | 98.99% | 0.2465 | 0.3242 | 0.8859 | [HMTNet_CV5]() |
 | Avg | 99.48% | 98.64%	| 0.2424 | 0.3183 |	0.8895 |  |
+
+
+| Methods | MAE | RMSE | PC |
+| :---: | :---: | :---: | :---: |
+| ResNeXt-50 | 0.2291 | 0.3017 | 0.8997 |
+| ResNet-18 | 0.2419 | 0.3166 | 0.8900 |
+| AlexNet | 0.2651 | 0.3481 | 0.8634 |
+| **HMTNet (MSE Loss)** | **0.2424** | **0.3183** | **0.8895** |
 
 
 ## Samples
