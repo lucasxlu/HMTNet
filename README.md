@@ -46,6 +46,7 @@ This repository holds the PyTorch implementation of our paper [Hierarchical Mult
 | 3 | 99.17% | 98.71% | 0.2468 | 0.3245 | 0.8883 | [HMTNet_CV3]() |
 | 4 | 99.63% | 98.25% | 0.2331 | 0.3033 | 0.9002 | [HMTNet_CV4]() |
 | 5 | 99.26% | 98.99% | 0.2465 | 0.3242 | 0.8859 | [HMTNet_CV5]() |
+| Avg | 99.48% | 98.64%	| 0.2424 | 0.3183 |	0.8895 |  |
 
 
 ## Samples
