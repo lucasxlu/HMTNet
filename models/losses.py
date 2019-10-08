@@ -66,7 +66,7 @@ class SmoothHuberLoss(_Loss):
     else return |y-\hat{y}|
     """
 
-    def __init__(self, reduction='mean', delta=0.01):
+    def __init__(self, reduction='mean', delta=0.6):
         super(SmoothHuberLoss, self).__init__()
         self.delta = delta
         self.reduction = reduction
