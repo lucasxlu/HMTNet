@@ -50,6 +50,8 @@ This repository holds the PyTorch implementation of our paper [Hierarchical Mult
 | 5 | 99.26% | 98.99% | 0.2465 | 0.3242 | 0.8859 |
 | Avg | 99.48% | 98.64%	| 0.2424 | 0.3183 |	0.8895 |
 
+#### Smooth Huber Loss 
+
 | Round | Acc_r | Acc_g | MAE | RMSE | PC | 
 | :---: | :---: | :---: | :---: | :---: | :---: |
 | 1 | 99.54% | 98.53% | 0.2357 | 0.3091 | 0.8915 |
