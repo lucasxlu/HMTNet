@@ -8,6 +8,6 @@ dlib==19.16.0
 mtcnn==0.0.6
 torchvision==0.2.1
 visdom==0.1.7
-Pillow==6.0.0
+pillow>=6.2.0
 skimage==0.15.0
 scikit_learn==0.20.3
