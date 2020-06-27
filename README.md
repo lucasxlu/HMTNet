@@ -1,12 +1,12 @@
-# Hierarchical Multi-Task Network For Race, Gender and Facial Attractiveness Recognition
+# Hierarchical Multi-task Network For Race, Gender and Facial Attractiveness Recognition
 ## Introduction
 This repository holds the PyTorch implementation of our paper [Hierarchical Multi-Task Network For Race, Gender and Facial Attractiveness Recognition](https://ieeexplore.ieee.org/abstract/document/8803614).
 
 ![HMTNet](./hmt_architecture.png)
 
 
-### New!!!
-1. By leveraging ``FiveCrops`` inference, we are able to achieve better performance at ``149th Epoch``! 
+### Updated
+1. By leveraging ``FiveCrops`` inference, we are able to achieve better performance.
 2. We also report ``5 cross validation`` results, since we find newly proposed models often use this metric instead of ``6/4 splitting strategy``.
 
 
@@ -23,7 +23,7 @@ This repository holds the PyTorch implementation of our paper [Hierarchical Mult
 | L1 | 0.2500 | 0.3299 | 0.8753 | 99.26% | 98.16% | 150 | 5e-2|
 | Smooth L1 | 0.2531 | 0.3313 | 0.8738 | 99.54% | 98.58% | 170 | 5e-2|
 | Smooth Huber | 0.2501 | 0.3263 | 0.8783 | 99.26% | 98.16% | 170 | 5e-2|
-| **FiveCrops (New)** | 0.2439 | 0.3226 | 0.8801 | 99.45% | 98.58% | 149 | 5e-2|
+| **Smooth Huber + FiveCrops (New)** | 0.2439 | 0.3226 | 0.8801 | 99.45% | 98.58% | 149 | 5e-2|
 
 
 ## Performance Comparison
