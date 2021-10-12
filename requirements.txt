@@ -1,7 +1,7 @@
 numpy==1.14.2
 torch==1.0.0
 pandas==0.22.0
-opencv_python==3.4.0.12
+opencv_python==3.4.7.28
 scikit_image==0.13.1
 matplotlib==2.2.2
 dlib==19.16.0
